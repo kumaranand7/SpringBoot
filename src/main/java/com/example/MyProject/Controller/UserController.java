@@ -7,6 +7,18 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
+/*
+        | Method | URL           | Kaam     |
+        | ------ | ------------- | -------- |
+        | POST   | `/users`      | Create   |
+        | GET    | `/users`      | Read all |
+        | GET    | `/users/{id}` | Read one |
+        | PUT    | `/users/{id}` | Update   |
+        | DELETE | `/users/{id}` | Delete   |
+
+*/
+
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -38,4 +50,13 @@ public class UserController {
         userService.deleteUser(id);
         return "User deleted";
     }
+
+
+    @PutMapping("/{id}")
+    public User updateUser(@PathVariable int id,
+                           @RequestBody User user) {
+        return userService.updateUser(id, user);
+    }
+
 }
+
