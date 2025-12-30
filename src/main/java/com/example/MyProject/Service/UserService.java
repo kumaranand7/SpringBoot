@@ -2,6 +2,7 @@ package com.example.MyProject.Service;
 
 import com.example.MyProject.Entity.User;
 import com.example.MyProject.repository.UserRepository;
+import com.example.MyProject.Exception.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,8 +25,12 @@ public class UserService {
     }
 
     // Get user by id
+//    public User getUserById(int id) {
+//        return userRepository.findById(id).orElse(null);
+//    }
+
     public User getUserById(int id) {
-        return userRepository.findById(id).orElse(null);
+        return userRepository.findById(id).orElseThrow(()-> new UserNotFoundException("User not found for id:" + id));
     }
 
     // Delete user
